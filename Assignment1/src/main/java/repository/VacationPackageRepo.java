@@ -8,10 +8,12 @@ import javax.persistence.Persistence;
 import java.util.ArrayList;
 
 public class VacationPackageRepo {
+    private static final String PERSISTENCE_UNIT_NAME = "SD.Assignment1";
+
     private final EntityManagerFactory entityManagerFactory;
 
-    public VacationPackageRepo(String persistenceUnitName) {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
+    public VacationPackageRepo() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     }
 
     public void addPackage(VacationPackage vacationPackage) {

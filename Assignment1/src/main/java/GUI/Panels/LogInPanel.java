@@ -1,5 +1,6 @@
 package GUI.Panels;
 
+import GUI.MainFrame;
 import GUI.Util.LogInActionCommand;
 import controller.LogInController;
 
@@ -7,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LogInPanel extends JPanel {
-    public LogInPanel() {
+
+    public LogInPanel(MainFrame mainFrame) {
         JTextField textFieldUsername = new JTextField(10);
         JPasswordField passwordField = new JPasswordField(10);
 
@@ -73,7 +75,7 @@ public class LogInPanel extends JPanel {
 
         ///// Controllers /////////////////////////////////////////
 
-        LogInController controller = new LogInController(textFieldUsername, passwordField);
+        LogInController controller = new LogInController(textFieldUsername, passwordField, mainFrame);
 
         buttonLogIn.addActionListener(controller);
         buttonRegister.addActionListener(controller);

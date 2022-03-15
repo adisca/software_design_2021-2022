@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-    private LogInPanel logInPanel = new LogInPanel();
-    private ClientPanel clientPanel = new ClientPanel();
-    private AgencyPanel agencyPanel = new AgencyPanel();
+    private final LogInPanel logInPanel = new LogInPanel(this);
+    private final ClientPanel clientPanel = new ClientPanel(this);
+    private final AgencyPanel agencyPanel = new AgencyPanel(this);
 
     public MainFrame(String title) {
         super(title);
