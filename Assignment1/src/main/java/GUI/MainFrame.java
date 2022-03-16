@@ -37,5 +37,6 @@ public class MainFrame extends JFrame {
                 container.add(clientPanel, BorderLayout.CENTER);
                 break;
         }
+        pack();
     }
 }

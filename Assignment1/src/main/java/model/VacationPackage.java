@@ -1,19 +1,28 @@
 package model;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
+import java.util.Vector;
 
 @Entity
-@Table(name = "vacation_packages")
+@Table(name = "vacation_packages", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "id_destination"})})
 public class VacationPackage {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private String name;
 
     @Column
     private Integer price;
+
+    @Column
+    private Date periodStart;
+
+    @Column
+    private Date periodEnd;
 
     @Column
     private String extraDetails;
@@ -25,12 +34,17 @@ public class VacationPackage {
     @JoinColumn(name = "id_destination")
     private VacationDestination destination;
 
+    @ManyToMany(mappedBy = "packages")
+    private List<User> users;
+
     public VacationPackage() {}
 
-    public VacationPackage(String name, Integer price, String extraDetails, Integer maxPeople,
-                           VacationDestination destination) {
+    public VacationPackage(String name, Integer price, Date periodStart, Date periodEnd, String extraDetails,
+                           Integer maxPeople, VacationDestination destination) {
         this.name = name;
         this.price = price;
+        this.periodStart = periodStart;
+        this.periodEnd = periodEnd;
         this.extraDetails = extraDetails;
         this.maxPeople = maxPeople;
         this.destination = destination;
@@ -68,6 +82,14 @@ public class VacationPackage {
         this.price = price;
     }
 
+    public void setPeriodStart(Date periodStart) {
+        this.periodStart = periodStart;
+    }
+
+    public void setPeriodEnd(Date periodEnd) {
+        this.periodEnd = periodEnd;
+    }
+
     public void setExtraDetails(String extraDetails) {
         this.extraDetails = extraDetails;
     }
@@ -78,5 +100,18 @@ public class VacationPackage {
 
     public void setDestination(VacationDestination destination) {
         this.destination = destination;
+    }
+
+    public Vector<String> toVector() {
+        Vector<String> vec = new Vector<>();
+        vec.add(id.toString());
+        vec.add(name);
+        vec.add(price.toString());
+        vec.add(periodStart.toString());
+        vec.add(periodEnd.toString());
+        vec.add(extraDetails);
+        vec.add(maxPeople.toString());
+        vec.add(destination.getName());
+        return vec;
     }
 }

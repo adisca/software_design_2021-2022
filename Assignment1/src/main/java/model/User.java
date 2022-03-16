@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +15,12 @@ public class User {
 
     @Column
     private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_package",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "package_id"))
+    private List<VacationPackage> packages;
 
     public User() {}
 

@@ -26,10 +26,8 @@ public class UserRepo {
 
     public User getUserByUsername(String username) {
         EntityManager em = entityManagerFactory.createEntityManager();
-        User user = em.createQuery("SELECT u from User u where u.username = :username", User.class).
+        return em.createQuery("SELECT u from User u where u.username = :username", User.class).
                 setParameter("username", username).getSingleResult();
-        return user;
     }
-
 
 }

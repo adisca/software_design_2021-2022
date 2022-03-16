@@ -1,7 +1,6 @@
 package GUI.Panels;
 
 import GUI.MainFrame;
-import GUI.Util.LogInActionCommand;
 import controller.LogInController;
 
 import javax.swing.*;
@@ -14,11 +13,8 @@ public class LogInPanel extends JPanel {
         JPasswordField passwordField = new JPasswordField(10);
 
         JButton buttonLogIn = new JButton("Log in");
-        buttonLogIn.setActionCommand(LogInActionCommand.LOG_IN.name());
         JButton buttonRegister = new JButton("Register");
-        buttonRegister.setActionCommand(LogInActionCommand.REGISTER.name());
         JButton buttonAgency = new JButton("Agency");
-        buttonAgency.setActionCommand(LogInActionCommand.AGENCY.name());
 
         setLayout(new GridBagLayout());
 
@@ -77,8 +73,8 @@ public class LogInPanel extends JPanel {
 
         LogInController controller = new LogInController(textFieldUsername, passwordField, mainFrame);
 
-        buttonLogIn.addActionListener(controller);
-        buttonRegister.addActionListener(controller);
-        buttonAgency.addActionListener(controller);
+        buttonLogIn.addActionListener(e -> controller.logIn());
+        buttonRegister.addActionListener(e ->controller.register());
+        buttonAgency.addActionListener(e -> controller.agency());
     }
 }

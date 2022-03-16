@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Vector;
 
 @Entity
 @Table(name = "vacation_destinations")
@@ -11,6 +13,9 @@ public class VacationDestination {
 
     @Column(unique = true)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
+    private List<VacationPackage> packages;
 
     public VacationDestination() {}
 
@@ -24,5 +29,12 @@ public class VacationDestination {
 
     public String getName() {
         return name;
+    }
+
+    public Vector<String> toVector() {
+        Vector<String> vec = new Vector<>();
+        vec.add(id.toString());
+        vec.add(name);
+        return vec;
     }
 }

@@ -1,20 +1,13 @@
 package service;
 
 import model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.NonUniqueObjectException;
 import repository.UserRepo;
 
 import javax.persistence.NoResultException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Objects;
 
 public class LogInService {
-    private final UserRepo repo;
-
-    public LogInService() {
-        repo = new UserRepo();
-    }
+    private final UserRepo repo = new UserRepo();;
 
     public void logIn(String username, String password) throws Exception {
         try {
