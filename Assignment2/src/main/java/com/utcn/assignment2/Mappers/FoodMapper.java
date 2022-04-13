@@ -25,6 +25,20 @@ public final class FoodMapper {
         return dtos;
     }
 
+    public static List<Food> convertFromDTOList(List<FoodDTO> dtos) {
+        List<Food> foods = new ArrayList<>();
+        for (FoodDTO dto : dtos) {
+            Food food = new Food();
+            food.setId(dto.getId());
+            food.setName(dto.getName());
+            food.setDescription(dto.getDescription());
+            food.setPrice(dto.getPrice());
+
+            foods.add(food);
+        }
+        return foods;
+    }
+
     public static Food convertFromDTO(FoodDTO dto, Category category) {
         Food food = new Food();
         food.setName(dto.getName());

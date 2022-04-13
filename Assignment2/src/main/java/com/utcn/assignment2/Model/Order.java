@@ -25,6 +25,7 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> foods;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
 
