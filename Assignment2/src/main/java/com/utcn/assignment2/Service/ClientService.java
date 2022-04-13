@@ -1,11 +1,11 @@
 package com.utcn.assignment2.Service;
 
 import com.utcn.assignment2.Model.Client;
+import com.utcn.assignment2.Model.Order;
 import com.utcn.assignment2.Repo.ClientRepo;
-import com.utcn.assignment2.Security.Encryptor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -14,6 +14,14 @@ public class ClientService {
 
     public ClientService(ClientRepo repo) {
         this.repo = repo;
+    }
+
+    public Client find(Long id) {
+        return repo.getById(id);
+    }
+
+    public List<Order> getOrders(Long id) {
+        return repo.getById(id).getOrders();
     }
 
 }

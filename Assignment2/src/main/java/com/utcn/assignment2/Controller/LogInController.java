@@ -18,13 +18,13 @@ public class LogInController {
     @PostMapping("/client/login")
     @ResponseBody
     public Map<String, Boolean> logInClient(@RequestBody LogInDTO dto) {
-        return Collections.singletonMap("status", service.logInClient(ClientMapper.convertFromDTO(dto)));
+        return Collections.singletonMap("status", service.logInClient(ClientMapper.convertFromLogInDTO(dto)));
     }
 
     @PostMapping("/client/signup")
     @ResponseBody
     public Map<String, Boolean> signUpClient(@RequestBody LogInDTO dto) {
-        return Collections.singletonMap("status", service.signUpClient(ClientMapper.convertFromDTO(dto)));
+        return Collections.singletonMap("status", service.signUpClient(ClientMapper.convertFromLogInDTO(dto)));
     }
 
     @PostMapping("/admin/login")
