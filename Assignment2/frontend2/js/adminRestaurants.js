@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    $("#addBtn").on("click", function() {
+    let restId = -1;
+
+    $("#addBtnRest").on("click", function() {
         var body = JSON.stringify({ name: $("#restaurant").val() });
         console.log(body);
         $.ajax({
@@ -24,7 +26,9 @@ $(document).ready(function() {
                 $("#restaurantList").append("<div class='restLabel'>" + data[d].id + " " + data[d].name + "</div>");
             }
             $(".restLabel").on("click", function(e) {
-                console.log(parseInt(e.currentTarget.textContent));
+                restId = parseInt(e.currentTarget.textContent);
+                console.log(restId);
+                $("#menuVeil").show();
             });
         });
     }
