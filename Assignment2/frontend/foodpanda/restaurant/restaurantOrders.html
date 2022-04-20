@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Orders</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="/css/adminRestaurant.css">
+</head>
+<body>
+    <div style="float: right;"><button id="btnBack">Back</button></div>
+    <div id="restaurantName"></div>
+    <div id="restaurantId"></div>
+    <br>
+    <label>Filter</label>
+    <div>
+        <select name="statuses" id="filterSelect">
+            <option value="">*unfiltered*</option>
+            <option value="PENDING">PENDING</option>
+            <option value="ACCEPTED">ACCEPTED</option>
+            <option value="DECLINED">DECLINED</option>
+            <option value="IN_MAKING">IN_MAKING</option>
+            <option value="IN_TRANSIT">IN_TRANSIT</option>
+            <option value="DELIVERED">DELIVERED</option>
+        </select>
+    </div>
+    <br>
+    <div class='column3'>
+        <div>Order history</div>
+        <div>
+            <button id="historyBtn">Refresh</button>
+        </div>
+        <div>
+            <ul id="historyList"></ul>
+        </div>
+    </div>
+
+    <script src="/js/restaurantOrders.js">
+    </script>
+</body>
+
+</html>
