@@ -5,7 +5,10 @@ import com.utcn.assignment2.Mappers.AdminMapper;
 import com.utcn.assignment2.Mappers.ClientMapper;
 import com.utcn.assignment2.Service.LogInService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.Map;
@@ -17,20 +20,22 @@ public class LogInController {
 
     @PostMapping("/client/login")
     @ResponseBody
-    public Map<String, Boolean> logInClient(@RequestBody LogInDTO dto) {
-        return Collections.singletonMap("status", service.logInClient(ClientMapper.convertFromLogInDTO(dto)));
+    public Map<String, Long> logInClient(@RequestBody LogInDTO dto) {
+        ClientMapper clientMapper = ClientMapper.getInstance();
+        return Collections.singletonMap("id", service.logInClient(clientMapper.convertFromLogInDTO(dto)));
     }
 
     @PostMapping("/client/signup")
     @ResponseBody
     public Map<String, Boolean> signUpClient(@RequestBody LogInDTO dto) {
-        return Collections.singletonMap("status", service.signUpClient(ClientMapper.convertFromLogInDTO(dto)));
+        ClientMapper clientMapper = ClientMapper.getInstance();
+        return Collections.singletonMap("status", service.signUpClient(clientMapper.convertFromLogInDTO(dto)));
     }
 
     @PostMapping("/admin/login")
     @ResponseBody
-    public Map<String, Boolean> logInAdmin(@RequestBody LogInDTO dto) {
-        return Collections.singletonMap("status", service.logInAdmin(AdminMapper.convertFromDTO(dto)));
+    public Map<String, Long> logInAdmin(@RequestBody LogInDTO dto) {
+        return Collections.singletonMap("id", service.logInAdmin(AdminMapper.convertFromDTO(dto)));
     }
 
     @PostMapping("/admin/signup")

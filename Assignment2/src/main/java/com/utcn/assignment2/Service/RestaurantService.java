@@ -1,10 +1,8 @@
 package com.utcn.assignment2.Service;
 
-import com.utcn.assignment2.Model.Category;
-import com.utcn.assignment2.Model.Food;
-import com.utcn.assignment2.Model.Order;
-import com.utcn.assignment2.Model.Restaurant;
+import com.utcn.assignment2.Model.*;
 import com.utcn.assignment2.Repo.RestaurantRepo;
+import com.utcn.assignment2.Util.OrderStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -52,8 +50,31 @@ public class RestaurantService {
                 }
             }
         }
-
         return orders;
     }
 
+    public List<Order> getFilteredOrders(Long id, String filter) {
+        Restaurant restaurant = repo.getById(id);
+        List<Order> orders = new ArrayList<>();
+        OrderStatus filterEnum = OrderStatus.valueOf(filter);
+
+        for (Category menu : restaurant.getMenus()) {
+            for (Food food : menu.getFoods()) {
+                for (Order order : food.getOrders()) {
+                    if (!orders.contains(order) && order.getStatus() == filterEnum) {
+                        orders.add(order);
+                    }
+                }
+            }
+        }
+        return orders;
+    }
+
+    public List<Restaurant> getFiltered(String name) {
+        ArrayList<Restaurant> result = new ArrayList<>();
+        Restaurant rest = repo.findByName(name);
+        if (rest != null)
+            result.add(rest);
+        return result;
+    }
 }

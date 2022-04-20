@@ -2,9 +2,7 @@ package com.utcn.assignment2.Service;
 
 import com.utcn.assignment2.Model.Category;
 import com.utcn.assignment2.Model.Food;
-import com.utcn.assignment2.Model.Restaurant;
 import com.utcn.assignment2.Repo.CategoryRepo;
-import com.utcn.assignment2.Repo.RestaurantRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

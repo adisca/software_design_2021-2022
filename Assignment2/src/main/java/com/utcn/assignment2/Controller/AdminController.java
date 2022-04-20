@@ -9,6 +9,8 @@ import com.utcn.assignment2.Mappers.FoodMapper;
 import com.utcn.assignment2.Mappers.OrderMapper;
 import com.utcn.assignment2.Mappers.RestaurantMapper;
 import com.utcn.assignment2.Service.*;
+import com.utcn.assignment2.Util.Strategy.StratAbusePsychology;
+import com.utcn.assignment2.Util.Strategy.StratFair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,23 +28,20 @@ public class AdminController {
     private FoodService foodService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private AdminService adminService;
 
-    @GetMapping("/restaurant")
+    @GetMapping("/admin/{id}")
     @ResponseBody
-    public List<RestaurantDTO> getAllRestaurants() {
-        return RestaurantMapper.convertToDTOList(restaurantService.getAll());
+    public List<RestaurantDTO> getAllRestaurantsOfAdmin(@PathVariable Long id) {
+        return RestaurantMapper.convertToDTOList(adminService.getRestaurants(id));
     }
 
-    @PostMapping("/restaurant")
+    @PostMapping("/admin/{id}")
     @ResponseBody
-    public Map<String, Boolean> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        return Collections.singletonMap("status", restaurantService.create(RestaurantMapper.convertFromDTO(restaurantDTO)));
-    }
-
-    @GetMapping("/restaurant/{id}")
-    @ResponseBody
-    public List<CategoryDTO> getAllCategoriesOfRestaurant(@PathVariable Long id) {
-        return CategoryMapper.convertToDTOList(restaurantService.getAllCategories(id));
+    public Map<String, Boolean> addRestaurant(@PathVariable Long id, @RequestBody RestaurantDTO restaurantDTO) {
+        return Collections.singletonMap("status",
+                restaurantService.create(RestaurantMapper.convertFromDTO(restaurantDTO, adminService.getById(id))));
     }
 
     @PostMapping("/restaurant/{id}")
@@ -52,35 +51,18 @@ public class AdminController {
                 categoryService.create(CategoryMapper.convertFromDTO(categoryDTO, restaurantService.find(id))));
     }
 
-    @GetMapping("/restaurant/{id}/orders")
+    @PostMapping("/orders/{id}/{status}")
     @ResponseBody
-    public List<OrderDTO> getAllOrdersOfRestaurant(@PathVariable Long id) {
-        return OrderMapper.convertToDTOList(restaurantService.getAllOrders(id));
-    }
-
-    @GetMapping("/orders/{id}/accept")
-    @ResponseBody
-    public Map<String, Boolean> acceptOrder(@PathVariable Long id) {
-        return Collections.singletonMap("status", orderService.accept(id));
-    }
-
-    @GetMapping("/orders/{id}/decline")
-    @ResponseBody
-    public Map<String, Boolean> declineOrder(@PathVariable Long id) {
-        return Collections.singletonMap("status", orderService.decline(id));
-    }
-
-    @GetMapping("/category/{id}")
-    @ResponseBody
-    public List<FoodDTO> getAllFoodsOfCategory(@PathVariable Long id) {
-        return FoodMapper.convertToDTOList(categoryService.getAllFoods(id));
+    public Map<String, Boolean> acceptOrder(@PathVariable Long id, @PathVariable String status) {
+        return Collections.singletonMap("status", orderService.changeStatus(id, status));
     }
 
     @PostMapping("/category/{id}")
     @ResponseBody
     public Map<String, Boolean> addFood(@PathVariable Long id, @RequestBody FoodDTO foodDTO) {
+        FoodMapper foodMapper = new FoodMapper(new StratFair());
         return Collections.singletonMap("status",
-                foodService.create(FoodMapper.convertFromDTO(foodDTO, categoryService.find(id))));
+                foodService.create(foodMapper.convertFromDTO(foodDTO, categoryService.find(id))));
     }
 
 }

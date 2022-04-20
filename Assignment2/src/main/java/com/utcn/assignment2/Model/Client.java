@@ -16,7 +16,6 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
     private String username;
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "belongsTo")

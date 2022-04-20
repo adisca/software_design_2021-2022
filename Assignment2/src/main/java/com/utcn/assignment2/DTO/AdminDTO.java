@@ -8,12 +8,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class RestaurantDTO {
-    private Long id;
+public class AdminDTO {
+    @NotNull
+    private  Long id;
     @NotNull
     private String name;
-    private String location;
-    private String zones;
-    @NotNull
-    private AdminDTO belongsTo;
 }
