@@ -1,0 +1,27 @@
+/* Create three equal columns that floats next to each other */
+.column3 {
+    float: left;
+    width: 30%;
+    padding: 10px;
+  }
+
+.column2 {
+    float: left;
+    width: 45%;
+    padding: 10px;
+  }
+
+  /* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.slightly_right {
+  padding-left: 10%;
+}
+
+.restLabel, .menuLabel, .foodLabel, .orderLabel, .historyLabel{
+  border-style: solid;
+}

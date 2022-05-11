@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Restaurants</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <link rel="stylesheet" href="/css/adminRestaurant.css">
+
+</head>
+<body>
+    <div style="float: right;"><button id="btnBack">Back</button></div>
+    <div id="clientName"></div>
+    <div id="clientId"></div>
+    <br>
+
+    <div>Search restaurant</div>
+    <div>
+        <input id="searchName" type="text">
+    </div>
+    <div>
+        <button id="btnSearch">Search</button>
+    </div>
+
+    <div class="row">
+        <div class="column3">
+            <div>
+                <label class='lab'>Restaurants</label>
+            </div>
+    
+            <ul id="restaurantList"></ul>
+    
+        </div>
+    
+        <div class="column3">
+            <div id="menuVeil" hidden>
+                <div>
+                    <label id="restName"></label>
+                </div>
+                <div>
+                    <label class='lab'>Menus</label>
+                </div>
+                <div>
+                    <ul id="menuList"></ul>
+                </div>
+            </div>
+        </div>
+    
+        <div class="column3">
+            <div id="foodVeil" hidden>
+                <div>
+                    <label id="menuName"></label>
+                </div>
+    
+                <div>
+                    <label>Foods</label>
+                </div>
+    
+                <div>
+                    <ul id="foodList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="column2">
+            <div>Curent order</div>
+            <div>
+                <label>Details</label>
+            </div>
+            <div>
+                <input id="extraDetails">
+            </div>
+            <div>
+                <button id="orderBtn">Place order</button>
+            </div>
+            <div>
+                <ul id="orderList"></ul>
+            </div>
+        </div>
+
+        <div class="column2">
+            <div>Order history</div>
+            <div>
+                <button id="historyBtn">Refresh</button>
+            </div>
+            <div>
+                <ul id="historyList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/clientRestaurants.js"></script>
+</body>
+
+</html>

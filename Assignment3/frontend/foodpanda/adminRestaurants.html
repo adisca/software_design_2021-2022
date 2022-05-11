@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Restaurants</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <link rel="stylesheet" href="/css/adminRestaurant.css">
+
+</head>
+<body>
+    <div style="float: right;"><button id="btnBack">Back</button></div>
+
+    <div id="adminName"></div>
+    <div id="adminId"></div>
+
+    <div>
+    <div class="column3">
+        <div>
+            <label class='lab'>Restaurant</label>
+        </div>
+        <div>
+            <input id="restaurantName"/>
+        </div>
+        <div>
+            <label class='lab'>Location</label>
+        </div>
+        <div>
+            <input id="restaurantLocation"/>
+        </div>
+        <div>
+            <label class='lab'>Zones</label>
+        </div>
+        <div>
+            <input id="restaurantZones"/>
+        </div>
+
+        <button id="addBtnRest">Add</button>
+
+        <ul id="restaurantList"></ul>
+
+    </div>
+
+    <div class="column3">
+        <div id="menuVeil" hidden>
+            <div>
+                <label id="restName" style="color: blue;text-decoration: underline;"></label>
+            </div>
+            <div>
+                <button id="btnExportPDF">Export to PDF</button>
+            </div>
+            <div>
+                <label class='lab'>Menu</label>
+            </div>
+            <div>
+                <input id="menu"/>
+            </div>
+            <div>
+                <button id="addBtnMenu">Add</button>
+            </div>
+            <div>
+                <ul id="menuList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="column3">
+        <div id="foodVeil" hidden>
+            <div>
+                <label id="menuName"></label>
+            </div>
+
+            <div>
+                <label class='lab'>Food</label>
+            </div>
+            <div>
+                <input id="foodInpName"/>
+            </div>
+
+            <div>
+                <label class='lab'>Description</label>
+            </div>
+            <div>
+                <input id="foodInpDesc"/>
+            </div>
+
+            <div>
+                <label class='lab'>Price</label>
+            </div>
+            <div>
+                <input id="foodInpPrice"/>
+            </div>
+
+            <div>
+                <button id="addBtnFood">Add</button>
+            </div>
+
+            <div>
+                <ul id="foodList"></ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="/js/adminRestaurants.js">
+    </script>
+</body>
+
+</html>
