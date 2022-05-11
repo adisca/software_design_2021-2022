@@ -12,6 +12,7 @@ public class ClientMapper {
     public static ClientMapper getInstance() {
         return clientMapper;
     }
+
     public Client convertFromLogInDTO(LogInDTO dto) {
         Client client = new Client();
         client.setUsername(dto.getCredential());
