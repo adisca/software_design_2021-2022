@@ -1,16 +1,22 @@
 package com.utcn.project.DTO;
 
-import com.utcn.project.Model.Activity;
-import com.utcn.project.Model.Qualification;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private Long id;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     private String password;
-    private Qualification qualification;
+    private String qualification;
     private List<ActivityDTO> activities;
 }
