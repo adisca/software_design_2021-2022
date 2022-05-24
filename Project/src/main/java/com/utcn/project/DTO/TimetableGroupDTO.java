@@ -13,5 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class TimetableGroupDTO {
     private Long id;
+    private Boolean official;
     private List<TimetableDTO> timetables;
 }

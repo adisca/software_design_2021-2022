@@ -6,6 +6,8 @@ import com.utcn.project.Model.User;
 
 public final class LogInMapper {
 
+    private LogInMapper() {}
+
     public static User convertFromDTOUser(LogInDTO dto) {
         User user = new User();
         user.setUsername(dto.getUsername());

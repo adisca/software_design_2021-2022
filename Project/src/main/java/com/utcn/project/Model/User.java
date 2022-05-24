@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,5 +22,7 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Qualification qualification;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Timetable> timetables;
 
 }

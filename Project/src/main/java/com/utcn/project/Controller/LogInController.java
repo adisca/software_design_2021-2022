@@ -2,46 +2,47 @@ package com.utcn.project.Controller;
 
 import com.utcn.project.DTO.LogInDTO;
 import com.utcn.project.DTO.UserDTO;
-import com.utcn.project.Service.AdminService;
+import com.utcn.project.Mapper.LogInMapper;
+import com.utcn.project.Mapper.UserMapper;
 import com.utcn.project.Service.LogInService;
-import com.utcn.project.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.Map;
 
 @RestController
 public class LogInController {
     @Autowired
     public LogInService service;
-    @Autowired
-    public UserService userService;
-    @Autowired
-    public AdminService adminService;
 
     @PostMapping("/login/user")
-    public Map<String, Boolean> logInUser(LogInDTO dto) {
-
-        return null;
+    @ResponseBody
+    public Map<String, UserDTO> logInUser(@RequestBody LogInDTO dto) {
+        return Collections.singletonMap(
+                "status", UserMapper.convertToDTO(service.logInUser(LogInMapper.convertFromDTOUser(dto)))
+        );
     }
 
     @PostMapping("/login/admin")
-    public Map<String, Boolean> logInAdmin(LogInDTO dto) {
-
-        return null;
+    @ResponseBody
+    public Map<String, Long> logInAdmin(@RequestBody LogInDTO dto) {
+        return Collections.singletonMap("status", service.logInAdmin(LogInMapper.convertFromDTOAdmin(dto)));
     }
 
     @PostMapping("/signup/user")
-    public Map<String, Boolean> signUpUser(UserDTO dto) {
-
-        return null;
+    @ResponseBody
+    public Map<String, Boolean> signUpUser(@RequestBody UserDTO dto) {
+        return Collections.singletonMap("status", service.signUpUser(UserMapper.convertFromDTO(dto)));
     }
 
     @PostMapping("/signup/admin")
-    public Map<String, Boolean> signUpAdmin(LogInDTO dto) {
-
-        return null;
+    @ResponseBody
+    public Map<String, Boolean> signUpAdmin(@RequestBody LogInDTO dto) {
+        return Collections.singletonMap("status", service.signUpAdmin(LogInMapper.convertFromDTOAdmin(dto)));
     }
 
 }

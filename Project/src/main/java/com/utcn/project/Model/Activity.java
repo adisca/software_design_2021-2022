@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,4 +27,19 @@ public class Activity {
     private Qualification qualification;
     @Enumerated(EnumType.STRING)
     private Day day;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity")
+    private List<Timetable> timetables;
+
+    public Integer getTotalPeople() {
+        int total = 0;
+        for (Timetable timetable : timetables) {
+            if (timetable.getOriginal())
+                total += 1;
+        }
+        return total;
+    }
+
+    public Boolean isFull() {
+        return nbPeople <= getTotalPeople();
+    }
 }
