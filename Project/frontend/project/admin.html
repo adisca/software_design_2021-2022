@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <link rel="stylesheet" href="/css/adminRestaurant.css">
+
+</head>
+<body>
+    <div style="float: right;"><button id="btnBack">Back</button></div>
+
+    <div id="adminName"></div>
+    <div id="adminId"></div>
+
+    <div>
+        <div class="column3">
+            <div>
+                <label class='lab'>Activity</label>
+            </div>
+            <div>
+                <input id="activityName"/>
+            </div>
+
+            <div>
+                <label class='lab'>Nb People</label>
+            </div>
+            <div>
+                <input id="activityNbPeople"/>
+            </div>
+
+            <div>
+                <label class='lab'>Min Time</label>
+            </div>
+            <div>
+                <select id="activityMinTimeHour"></select>
+                <select id="activityMinTimeMinute"></select>
+            </div>
+
+            <div>
+                <label class='lab'>Interval Start</label>
+            </div>
+            <div>
+                <select id="activityIntervalStartHour"></select>
+                <select id="activityIntervalStartMinute"></select>
+            </div>
+
+            <div>
+                <label class='lab'>Interval End</label>
+            </div>
+            <div>
+                <select id="activityIntervalEndHour"></select>
+                <select id="activityIntervalEndMinute"></select>
+            </div>
+
+            <div>
+                <label>Qualification</label>
+            </div>
+            <div>
+                <select id="qualificationSelect">
+                    <option value="">*NONE*</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Day</label>
+            </div>
+            <div>
+                <select id="daySelect">
+                    <option value="">*ALL*</option>
+                </select>
+            </div>
+
+            <button id="addBtnActivity">Add</button>
+
+            <ul id="activityList"></ul>
+
+        </div>
+    </div>
+    <script src="/js/admin.js">
+    </script>
+</body>
+
+</html>

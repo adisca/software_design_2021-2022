@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log in</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <label>Username</label>
+        </div>
+        <div>
+            <input id="username"/>
+        </div>
+
+        <div>
+            <label>Password</label>
+        </div>
+        <div>
+            <input id="password" type="password"/>
+        </div>
+
+        <div>
+            <label>First Name</label>
+        </div>
+        <div>
+            <input id="firstname"/>
+        </div>
+
+        <div>
+            <label>Last Name</label>
+        </div>
+        <div>
+            <input id="lastname"/>
+        </div>
+
+        <div>
+            <label>Qualification</label>
+        </div>
+        <div>
+            <select id="qualificationSelect">
+                <option value="">*NONE*</option>
+            </select>
+        </div>
+
+        <div>
+            <button id="loginCli">Log in User</button>
+            <button id="signupCli">Sign up User</button>
+        </div>
+
+        <div>
+            <button id="loginAdm">Log in Admin</button>
+            <button id="signupAdm">Sign up Admin</button>
+        </div>
+    </div>
+
+    <br>
+    <div>Forgot a password once and it is encrypted in the database, so I am writing them down:</div>
+    <div>client1 1234</div>
+    <div>client2 123</div>
+    <div>admin admin</div>
+    <div>admin2 admin</div>
+
+    <script src="/js/login.js">
+    </script>
+</body>
+
+</html>
