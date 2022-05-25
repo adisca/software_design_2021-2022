@@ -13,5 +13,5 @@ public interface TimetableRepo extends JpaRepository<Timetable, Long> {
 
     List<Timetable> getAllByOriginal(Boolean original);
     List<Timetable> getAllByUserAndActivityAndOriginal(User user, Activity activity, Boolean original);
-
+    List<Timetable> getAllByUserIdAndOriginal(Long id, Boolean original);
 }

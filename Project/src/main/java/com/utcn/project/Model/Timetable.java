@@ -25,10 +25,7 @@ public class Timetable {
     @ManyToOne
     @JoinColumn(name = "id_activity")
     private Activity activity;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "timetables_groups",
-            joinColumns = @JoinColumn(name = "timetable_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToMany(mappedBy = "timetables")
     private List<TimetableGroup> groups;
 
 }

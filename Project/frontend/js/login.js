@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    Cookies.remove("id");
+    Cookies.remove("name");
+    Cookies.remove("qualification");
 
     function getQualifications() {
         $.get("http://localhost:8080/project/util/qualification", function(data) {
@@ -20,7 +23,12 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                 console.log(data);
-                window.location = "/project/user.html";
+                if (data.status != null) {
+                    Cookies.set("name", data.status.username);
+                    Cookies.set("id", data.status.id);
+                    Cookies.set("qualification", data.status.qualification);
+                    window.location = "/project/user.html";
+                }
             }
         });
     });
@@ -60,7 +68,10 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                     console.log(data);
-                    window.location = "/project/admin.html";
+                    if (data.status !== -1) {
+                        Cookies.set("id", data.status);
+                        window.location = "/project/admin.html";
+                    }
             }
         });
     });

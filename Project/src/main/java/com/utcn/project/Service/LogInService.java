@@ -4,27 +4,24 @@ import com.utcn.project.Model.Admin;
 import com.utcn.project.Model.User;
 import com.utcn.project.Repo.AdminRepo;
 import com.utcn.project.Repo.UserRepo;
-import com.utcn.project.Security.Encryptor;
+import com.utcn.project.Security.Encryption.Encryptor;
+import com.utcn.project.Security.Encryption.EncryptorProxy;
 import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 @Service
 public class LogInService {
     private final UserRepo userRepo;
     private final AdminRepo adminRepo;
-    private Encryptor encryptor;
+
+    private final Encryptor encryptor;
 
     public LogInService(UserRepo userRepo, AdminRepo adminRepo) {
         this.userRepo = userRepo;
         this.adminRepo = adminRepo;
-        try {
-            this.encryptor = new Encryptor();
-        } catch (NoSuchAlgorithmException e) {
-            this.encryptor = null;
-            e.printStackTrace();
-        }
+
+        this.encryptor = new EncryptorProxy();
     }
 
     /**

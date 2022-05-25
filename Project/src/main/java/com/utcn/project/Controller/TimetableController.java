@@ -25,9 +25,9 @@ public class TimetableController {
     @Autowired
     private ActivityService activityService;
 
-    @PostMapping("/user/{id}/choose")
+    @PostMapping("/user/choose")
     @ResponseBody
-    public Map<String, Boolean> addUserChoice(@PathVariable Long id, @RequestBody TimetableDTO dto) {
+    public Map<String, Boolean> addUserChoice(@RequestBody TimetableDTO dto) {
         User user = userService.getById(dto.getUser().getId());
         if (user == null)
             return Collections.singletonMap("status", false);
@@ -38,10 +38,22 @@ public class TimetableController {
                 "status", service.createTimetable(TimetableMapper.convertFromDTO(dto, user, activity)));
     }
 
+    @GetMapping("/user/{id}/chosen_timetables")
+    @ResponseBody
+    public List<TimetableDTO> getUserChosenTimetables(@PathVariable Long id) {
+        return TimetableMapper.convertToDTOList(service.getByUserId(id));
+    }
+
+    @GetMapping("/user/{id}/official_timetable")
+    @ResponseBody
+    public List<TimetableDTO> getUserOfficialTimetable(@PathVariable Long id) {
+        return TimetableMapper.convertToDTOList(service.getUserOfficial(id));
+    }
+
     @PostMapping("/admin/timetables/generate")
-    public void generateGroups() {
-        service.generateTimetables();
-        service.generateGroups();
+    @ResponseBody
+    public Map<String, Boolean> generateGroups() {
+        return Collections.singletonMap("status", service.generateTimetables() && service.generateGroups());
     }
 
     @GetMapping("/admin/timetables")
@@ -51,8 +63,9 @@ public class TimetableController {
     }
 
     @PostMapping("/admin/timetables/pick/{id}")
-    public void changeOfficial(@PathVariable Long id) {
-        service.changeOfficialGroup(id);
+    @ResponseBody
+    public Map<String, Boolean> changeOfficial(@PathVariable Long id) {
+        return Collections.singletonMap("status", service.changeOfficialGroup(id));
     }
 
 }

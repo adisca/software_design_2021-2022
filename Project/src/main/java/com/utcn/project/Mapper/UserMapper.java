@@ -4,11 +4,16 @@ import com.utcn.project.DTO.UserDTO;
 import com.utcn.project.Model.Enums.Qualification;
 import com.utcn.project.Model.User;
 
-public final class UserMapper {
+public class UserMapper {
+    private static final UserMapper userMapper = new UserMapper();
 
     private UserMapper() {}
 
-    public static User convertFromDTO(UserDTO dto) {
+    public static UserMapper getInstance() {
+        return userMapper;
+    }
+
+    public User convertFromDTO(UserDTO dto) {
         User user = new User();
 
         user.setUsername(dto.getUsername());
@@ -20,7 +25,7 @@ public final class UserMapper {
         return user;
     }
 
-    public static UserDTO convertToDTO(User user) {
+    public UserDTO convertToDTO(User user) {
         if (user == null)
             return null;
 

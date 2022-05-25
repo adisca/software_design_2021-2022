@@ -1,3 +1,99 @@
-<div>
-    User Page
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Page</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jqueryrouter@2.1.0/dist/js/jquery.router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <link rel="stylesheet" href="/css/adminRestaurant.css">
+
+</head>
+<body>
+    <div style="float: right;"><button id="btnBack">Back</button></div>
+    <div id="userName"></div>
+    <div id="userId"></div>
+    <div id="userQualification"></div>
+    <br>
+
+    <div class="row">
+        <div class="column3">
+            <div>
+                <div>Search activity</div>
+                <div>
+                    <input id="searchName" type="text">
+                </div>
+                <div>
+                    <label>Day</label>
+                </div>
+                <div>
+                    <select id="searchDaySelect">
+                        <option value="">*ALL*</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="btnSearch">Search</button>
+                </div>
+            </div>
+    
+        </div>
+
+        <div class="column3">
+            <div>
+                <label id="chosenActivityName">*Activity Name*</label>
+            </div>
+            <div>
+                <label id="chosenActivityId">*ID*</label>
+            </div>
+            <div>
+                <div>
+                    <label class='lab'>Interval Start</label>
+                </div>
+                <div>
+                    <select id="activityIntervalStartHour"></select>
+                    <select id="activityIntervalStartMinute"></select>
+                </div>
+    
+                <div>
+                    <label class='lab'>Interval End</label>
+                </div>
+                <div>
+                    <select id="activityIntervalEndHour"></select>
+                    <select id="activityIntervalEndMinute"></select>
+                </div>
+            </div>
+            <div>
+                <button id="btnChoose">Choose</button>
+            </div>
+        </div>
+
+        <div class="column3">
+            <div>
+                <button id="btnViewOfficial">View Your Timetable</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="column2">
+            <div>
+                <label class='lab'>Activities</label>
+            </div>
+            <ul id="activityList"></ul>
+        </div>
+        <div class="column2">
+            <div>
+                <label class='lab'>Chosen Timetables</label>
+            </div>
+            <ul id="timetableList"></ul>
+        </div>
+    </div>
+
+    <script src="/js/user.js"></script>
+</body>
+
+</html>

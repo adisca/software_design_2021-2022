@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface TimetableGroupRepo extends JpaRepository<TimetableGroup, Long> {
 
-    void deleteAllByOfficial(Boolean official);
-
     List<TimetableGroup> getAllByOfficial(Boolean official);
 }

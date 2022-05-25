@@ -16,6 +16,9 @@ public class TimetableGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Boolean official;
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "timetables_groups",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "timetable_id"))
     private List<Timetable> timetables;
 }

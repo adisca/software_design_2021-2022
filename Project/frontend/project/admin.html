@@ -15,10 +15,10 @@
 <body>
     <div style="float: right;"><button id="btnBack">Back</button></div>
 
-    <div id="adminName"></div>
     <div id="adminId"></div>
+    <br>
 
-    <div>
+    <div class="row">
         <div class="column3">
             <div>
                 <label class='lab'>Activity</label>
@@ -78,8 +78,29 @@
 
             <button id="addBtnActivity">Add</button>
 
-            <ul id="activityList"></ul>
+        </div>
 
+        <div class="column3">
+            <button id="btnGenerate">Generate timetable groups</button>
+        </div>
+
+        <div class="column3">
+            <div>
+                <label>Selected Group:</label>
+            </div>
+            <div>
+                <label id="chosenGroupId">*Selected Group ID*</label>
+            </div>
+            <button id="btnMakeOfficial">Make official</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="column2">
+            <ul id="activityList"></ul>
+        </div>
+        <div class="column2">
+            <ul id="timetableGroupList"></ul>
         </div>
     </div>
     <script src="/js/admin.js">

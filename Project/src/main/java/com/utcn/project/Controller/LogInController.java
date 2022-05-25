@@ -22,8 +22,9 @@ public class LogInController {
     @PostMapping("/login/user")
     @ResponseBody
     public Map<String, UserDTO> logInUser(@RequestBody LogInDTO dto) {
+        UserMapper mapper = UserMapper.getInstance();
         return Collections.singletonMap(
-                "status", UserMapper.convertToDTO(service.logInUser(LogInMapper.convertFromDTOUser(dto)))
+                "status", mapper.convertToDTO(service.logInUser(LogInMapper.convertFromDTOUser(dto)))
         );
     }
 
@@ -36,7 +37,8 @@ public class LogInController {
     @PostMapping("/signup/user")
     @ResponseBody
     public Map<String, Boolean> signUpUser(@RequestBody UserDTO dto) {
-        return Collections.singletonMap("status", service.signUpUser(UserMapper.convertFromDTO(dto)));
+        UserMapper mapper = UserMapper.getInstance();
+        return Collections.singletonMap("status", service.signUpUser(mapper.convertFromDTO(dto)));
     }
 
     @PostMapping("/signup/admin")

@@ -7,10 +7,6 @@ import lombok.Setter;
 
 import java.sql.Time;
 
-/**
- * Careful at the DTOs they aren't done properly
- */
-
 @Getter
 @Setter
 @NoArgsConstructor

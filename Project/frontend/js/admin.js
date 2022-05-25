@@ -1,8 +1,15 @@
 $(document).ready(function() {
+    // Must go through login at least once
+    if (Cookies.get("id") === undefined)
+        window.location = "/project/login.html";
+
+    let groupId = -1;
 
     $("#btnBack").on("click", function() {
         window.location = "/project/login.html";
     });
+
+    $("#adminId").text("Hello, admin with id " + Cookies.get("id"));
 
     function getQualifications() {
         $.get("http://localhost:8080/project/util/qualification", function(data) {
@@ -32,6 +39,23 @@ $(document).ready(function() {
             $(id).append("<option value=" + String(i).padStart(2, '0') + ">" + i + "</option>");
     }
 
+    function setupTimetableGroupLabels() {
+        $(".timetableGroupLabel").on("click", function(e) {
+            let groupIdAux = $(e.currentTarget).children()[0].textContent;
+            groupId = parseInt(groupIdAux.substring(groupIdAux.search(/[0-9]+/)));
+
+            $(".timetableGroupLabel").css("color", "");
+            $(".timetableGroupLabel").css("border-color", "");
+
+            $(this).css("color", "blue");
+            $(this).css("border-color", "blue");
+
+            $("#chosenGroupId").text(groupId);
+
+            console.log("Chosen group:" + groupId);
+        });
+    }
+
     function getActivities() {
         $.get("http://localhost:8080/project/admin/activity", function(data) {
             console.log(data);
@@ -47,6 +71,32 @@ $(document).ready(function() {
                                             "</div><div>Qualification: " + data[d].qualification +
                                             "</div></div><br>");
             }
+        });
+    }
+
+    function getTimetableGroups() {
+        $.get("http://localhost:8080/project/admin/timetables", function(data) {
+            console.log(data);
+            $("#timetableGroupList").empty();
+            for (d in data) {
+                let toAppend = "";
+                toAppend += ("<div class='timetableGroupLabel" + (data[d].official ? " timetableGroupChosenLabel" : "") + "'><div>ID: " + data[d].id + "</div>");
+
+                for (t in data[d].timetables) {
+                    toAppend += ("<div class='timetableLabel'><div>ID: " + data[d].timetables[t].id +
+                                                "</div><div>IntervalStart: " + data[d].timetables[t].intervalStart +
+                                                "</div><div>IntervalEnd: " + data[d].timetables[t].intervalEnd +
+                                                "</div><div>ActivityID: " + data[d].timetables[t].activity.id +
+                                                "</div><div>Activity: " + data[d].timetables[t].activity.name +
+                                                "</div><div>UserID: " + data[d].timetables[t].user.id +
+                                                "</div><div>User: " + data[d].timetables[t].user.username +
+                                                "</div></div><br>");
+                }
+                
+                toAppend += ("</div><br>");
+                $("#timetableGroupList").append(toAppend);
+            }
+            setupTimetableGroupLabels();
         });
     }
 
@@ -69,8 +119,28 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                 console.log(data);
+                getActivities();
             }
         });
+    });
+
+    $("#btnGenerate").on("click", function() {
+        $.post("http://localhost:8080/project/admin/timetables/generate", function(data) {
+            console.log(data);
+            getTimetableGroups();
+        });
+    });
+
+    $("#btnMakeOfficial").on("click", function() {
+        if (groupId !== -1) {
+            $.post("http://localhost:8080/project/admin/timetables/pick/" + groupId, function(data) {
+                console.log(data);
+                groupId = -1;
+                $("#chosenGroupId").text("*Selected Group ID*");
+                getTimetableGroups();
+            });
+        } else
+            console.log("Select a group first!");
     });
 
     prepareHourSelect("#activityMinTimeHour");
@@ -86,4 +156,5 @@ $(document).ready(function() {
     getDays();
 
     getActivities();
+    getTimetableGroups();
 });
