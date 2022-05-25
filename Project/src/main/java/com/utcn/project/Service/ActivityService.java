@@ -41,6 +41,8 @@ public class ActivityService {
     }
 
     public Boolean create(Activity activity) {
+        if (activity.getName() == null || activity.getName().equals("") || activity.getNbPeople() == null)
+            return Boolean.FALSE;
         repo.save(activity);
         return Boolean.TRUE;
     }

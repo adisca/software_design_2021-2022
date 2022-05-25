@@ -1,9 +1,7 @@
 package com.utcn.project.Service;
 
-import com.utcn.project.Model.Activity;
 import com.utcn.project.Model.Timetable;
 import com.utcn.project.Model.TimetableGroup;
-import com.utcn.project.Model.User;
 import com.utcn.project.Repo.TimetableGroupRepo;
 import com.utcn.project.Repo.TimetableRepo;
 import com.utcn.project.Util.Strategy.StratGenProper;
@@ -102,11 +100,17 @@ public class TimetableService {
     }
 
     public Boolean createTimetable(Timetable timetable) {
+        // throws NullPointerProtection :))
+        if (timetable == null || timetable.getActivity() == null || timetable.getUser() == null ||
+                timetable.getIntervalStart() == null || timetable.getIntervalEnd() == null)
+            return Boolean.FALSE;
+
         // Interval outside of bounds
-        if (timetable.getIntervalStart().toLocalTime().compareTo(timetable.getActivity().getIntervalStart().toLocalTime()) < 0 ||
-                timetable.getIntervalEnd().toLocalTime().compareTo(timetable.getActivity().getIntervalEnd().toLocalTime()) > 0 ||
-                timetable.getIntervalStart().toLocalTime().compareTo(timetable.getIntervalEnd().toLocalTime()) > 0
-        )
+        if (timetable.getIntervalStart().toLocalTime()
+                .compareTo(timetable.getActivity().getIntervalStart().toLocalTime()) < 0 ||
+                timetable.getIntervalEnd().toLocalTime()
+                        .compareTo(timetable.getActivity().getIntervalEnd().toLocalTime()) > 0 ||
+                timetable.getIntervalStart().toLocalTime().compareTo(timetable.getIntervalEnd().toLocalTime()) > 0)
             return Boolean.FALSE;
 
         // Activity full

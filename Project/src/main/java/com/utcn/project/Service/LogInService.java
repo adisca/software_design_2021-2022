@@ -45,6 +45,10 @@ public class LogInService {
      * @return      True if success, false otherwise
      */
     public Boolean signUpUser(User user) {
+        if (user == null || user.getUsername() == null || user.getPassword() == null || user.getFirstName() == null ||
+                user.getLastName() == null || user.getUsername().equals("") || user.getPassword().equals("") ||
+                user.getFirstName().equals("") || user.getLastName().equals(""))
+            return Boolean.FALSE;
         user.setPassword(encryptor.encrypt(user.getPassword()));
         if (userRepo.findByUsername(user.getUsername()) == null &&
                 adminRepo.findByUsername(user.getUsername()) == null) {
@@ -75,6 +79,10 @@ public class LogInService {
      * @return      True if success, false otherwise
      */
     public Boolean signUpAdmin(Admin admin) {
+        if (admin == null || admin.getUsername() == null || admin.getPassword() == null ||
+                admin.getUsername().equals("") || admin.getPassword().equals(""))
+            return Boolean.FALSE;
+
         admin.setPassword(encryptor.encrypt(admin.getPassword()));
         if (userRepo.findByUsername(admin.getUsername()) == null &&
                 adminRepo.findByUsername(admin.getUsername()) == null) {
